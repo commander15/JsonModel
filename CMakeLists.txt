@@ -1,27 +1,16 @@
-qt_add_qml_module(JsonModel
-    URI JsonModel
-    QML_FILES
-        JsonListModelRole.qml
-        JsonListModel.qml
-    SOURCES
-        jsonlistmodel.cpp
-    PLUGIN_TARGET JsonModel
-)
+cmake_minimum_required(VERSION 3.20)
 
-set(INSTALL_DIR qml/JsonModel)
+project(JsonModel VERSION 0.1 LANGUAGES CXX)
 
-install(TARGETS JsonModel
-    ARCHIVE DESTINATION ${INSTALL_DIR}
-    LIBRARY DESTINATION ${INSTALL_DIR}
-    RUNTIME DESTINATION ${INSTALL_DIR}
-)
+option(JsonModel_BUILD_QML_MODULE "Build QML module" ON)
 
-qt_query_qml_module(JsonModel
-    QMLDIR    QMLDIR
-    TYPEINFO  TYPEINFO
-    QML_FILES QML_FILES
-)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
 
-install(FILES ${QMLDIR} ${TYPEINFO} ${QML_FILES}
-    DESTINATION ${INSTALL_DIR}
-)
+find_package(Qt6 6.2 COMPONENTS Qml REQUIRED)
+
+qt_standard_project_setup()
+qt_policy(SET QTP0001 NEW)
+
+add_subdirectory(src)
