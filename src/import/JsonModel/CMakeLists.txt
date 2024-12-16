@@ -17,11 +17,10 @@ install(TARGETS JsonModel
 )
 
 qt_query_qml_module(JsonModel
-    QMLDIR    QMLDIR
-    TYPEINFO  TYPEINFO
-    QML_FILES QML_FILES
+    QMLDIR        DIR
+    QML_FILES     FILES
+    TYPEINFO      TYPES
+    PLUGIN_TARGET TARGET
 )
 
-install(FILES ${QMLDIR} ${TYPEINFO} ${QML_FILES}
-    DESTINATION ${INSTALL_DIR}
-)
+install(FILES ${DIR} ${FILES} ${TYPES} DESTINATION ${INSTALL_DIR})
